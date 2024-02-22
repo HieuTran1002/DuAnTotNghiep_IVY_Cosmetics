@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thuong Hieu List</title>
+</head>
+<body>
+<h2>Thuong Hieu List</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ma Thuong Hieu</th>
+        <th>Ten Thuong Hieu</th>
+        <th>Mo Ta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="thuongHieu : ${thuongHieuList}">
+        <td th:text="${thuongHieu.id}"></td>
+        <td th:text="${thuongHieu.maThuongHieu}"></td>
+        <td th:text="${thuongHieu.tenThuongHieu}"></td>
+        <td th:text="${thuongHieu.moTa}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
