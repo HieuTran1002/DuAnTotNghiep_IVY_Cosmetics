@@ -16,8 +16,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "thuonghieu")
-public class ThuongHieu {
+@Table(name = "danhmuc")
+public class DanhMuc {
 
     @Id
     @Column(name = "id")
@@ -29,22 +29,17 @@ public class ThuongHieu {
     @Column(name = "ten")
     private String ten;
 
-    @Column(name = "mota")
-    private String moTa;
-
     @Column(name = "trangthai")
     private Integer trangThai;
 
-    @OneToMany(mappedBy = "thuongHieu", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "danhMuc", fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<SanPham> sanPhamList;
+    List<SanPham> sanPhamList;
 
-    public ThuongHieu(UUID id, String ma, String ten, String moTa, Integer trangThai, List<SanPham> sanPhamList) {
+    public DanhMuc(UUID id, String ma, String ten, Integer trangThai) {
         this.id = id;
         this.ma = ma;
         this.ten = ten;
-        this.moTa = moTa;
         this.trangThai = trangThai;
-        this.sanPhamList = sanPhamList;
     }
 }
