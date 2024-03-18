@@ -1,7 +1,6 @@
 package com.example.duantotnghiep.repository;
 
 import com.example.duantotnghiep.entity.GiamGia;
-import com.example.duantotnghiep.response.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
