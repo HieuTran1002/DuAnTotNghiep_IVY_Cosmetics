@@ -27,6 +27,7 @@ public class GioHangChiTietServiceImpl implements GioHangChiTietService {
     public GioHangChiTietEntity update(UUID id, GioHangChiTietEntity gioHangChiTietEntity) {
         GioHangChiTietEntity gioHangChiTietEntity1=gioHangChiTietRepository.findById(id).orElse(null);
         gioHangChiTietEntity1.setId(gioHangChiTietEntity.getId());
+        gioHangChiTietEntity1.setGioHang(gioHangChiTietEntity.getGioHang());
         gioHangChiTietEntity1.setSanPhamChiTietEntity(gioHangChiTietEntity.getSanPhamChiTietEntity());
         gioHangChiTietEntity1.setDonGia(gioHangChiTietEntity.getDonGia());
         gioHangChiTietEntity1.setGhiChu(gioHangChiTietEntity.getGhiChu());

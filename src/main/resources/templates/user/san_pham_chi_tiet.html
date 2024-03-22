@@ -24,7 +24,9 @@
         <td th:text="${item.id}"></td>
         <td th:text="${item.sanPhamEntity != null ? item.sanPhamEntity.ten : 'Unknown'}"></td>
         <td th:text="${item.mauSacEntity != null ? item.mauSacEntity.tenMauSac : 'Unknown'}"></td>
-        <td th:text="${item.anhSanPhamEntity !=null ? item.anhSanPhamEntity.tenAnhSanPham :'Unknown'}"></td>
+        <td>
+            <img th:src="@{'/upload/' + ${item.anhSanPhamEntity !=null ? item.anhSanPhamEntity.tenAnhSanPham :'Unknown'}}" alt="Ảnh Sản Phẩm" style="max-width: 50px">
+        </td>
         <td th:text="${item.soLuongTon}"></td>
         <td th:text="${item.trangThai == 1 ? 'Con' : 'Het'}"></td>
         <td>

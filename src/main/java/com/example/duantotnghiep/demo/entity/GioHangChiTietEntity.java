@@ -21,7 +21,7 @@ public class GioHangChiTietEntity {
     @JoinColumn(name = "idsanphamchitiet",referencedColumnName = "id")
     private SanPhamChiTietEntity sanPhamChiTietEntity;
     @Column(name = "soluong")
-    private UUID soLuong;
+    private Integer soLuong;
     @Column(name = "dongia")
     private BigDecimal donGia;
     @Column(name = "dongiakhigiam")
@@ -30,4 +30,8 @@ public class GioHangChiTietEntity {
     private String ghiChu;
     @Column(name = "trangthai")
     private Integer trangThai;
+
+    public String getSanPhamAnh(){
+        return this.sanPhamChiTietEntity.getAnhSanPhamEntity().getTenAnhSanPham();
+    }
 }

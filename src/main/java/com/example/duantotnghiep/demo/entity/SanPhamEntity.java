@@ -38,7 +38,7 @@ public class SanPhamEntity {
     @Column(name = "ten")
     private String ten;
     @Column(name = "mota")
-    private String mota;
+    private String moTa;
     @Column(name = "gianhap")
     private BigDecimal giaNhap;
     @Column(name = "giaban")
@@ -48,7 +48,7 @@ public class SanPhamEntity {
     @Column(name = "giasaukhuyenmai")
     private BigDecimal giaSauKhuyenMai;
     @Column(name = "ngaynhap")
-    private Date ngaynhap;
+    private Date ngayNhap;
     @Column(name = "dohot")
     private Integer doHot;
 }

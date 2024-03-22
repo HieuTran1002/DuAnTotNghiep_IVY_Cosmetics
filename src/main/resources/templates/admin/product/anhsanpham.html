@@ -40,7 +40,6 @@
         <td th:text="${list.maAnhSanPham}"></td>
         <td>
             <img th:src="@{'/upload/' + ${list.tenAnhSanPham}}" alt="Ảnh Sản Phẩm" style="max-width: 50px">
-            </div>
         </td>
         <td th:text="${list.trangThai==1?'Con':'Het'}"></td>
         <td><a th:href="@{/upload-file/detail/{id}(id=${list.id})}" class="btn btn btn-secondary"><span class="bi bi-app-indicator"></span></a></td>
