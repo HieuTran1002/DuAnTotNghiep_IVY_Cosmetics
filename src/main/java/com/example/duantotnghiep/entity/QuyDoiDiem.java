@@ -35,10 +35,4 @@ public class QuyDoiDiem {
 //    @JsonManagedReference
 //    List<SanPham> sanPhamList;
 
-    public QuyDoiDiem(UUID id, String soTiemTuongUng, String soDiemTuongUng, Integer trangThai) {
-        this.id = id;
-        this.soTiemTuongUng = soTiemTuongUng;
-        this.soDiemTuongUng = soDiemTuongUng;
-        this.trangThai = trangThai;
-    }
 }

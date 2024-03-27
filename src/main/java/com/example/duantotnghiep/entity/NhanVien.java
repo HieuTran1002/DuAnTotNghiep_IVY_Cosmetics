@@ -57,17 +57,4 @@ public class NhanVien {
     @JsonManagedReference
     private List<NhanVien> idGuiBC;
 
-    public NhanVien(UUID id, String ma, String ten, String image, Boolean gioiTinh, String soDienThoai, Date ngaySinh, Date ngayTao, Date ngayCapNhat, int chucVu, Integer trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.image = image;
-        this.gioiTinh = gioiTinh;
-        this.soDienThoai = soDienThoai;
-        this.ngaySinh = ngaySinh;
-        this.ngayTao = ngayTao;
-        this.ngayCapNhat = ngayCapNhat;
-        this.chucVu = chucVu;
-        this.trangThai = trangThai;
-    }
 }

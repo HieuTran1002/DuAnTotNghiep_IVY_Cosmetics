@@ -54,16 +54,5 @@ public class KhachHang {
     @JsonManagedReference
     private List<Voucher> voucherLists;
 
-    public KhachHang(UUID id, String ma, String ten, String image, Boolean gioiTinh, String soDienThoai, Date ngaySinh, Date ngayTao, Date ngayCapNhat, Integer trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.image = image;
-        this.gioiTinh = gioiTinh;
-        this.soDienThoai = soDienThoai;
-        this.ngaySinh = ngaySinh;
-        this.ngayTao = ngayTao;
-        this.ngayCapNhat = ngayCapNhat;
-        this.trangThai = trangThai;
-    }
+
 }

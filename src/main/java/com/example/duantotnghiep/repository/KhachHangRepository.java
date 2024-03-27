@@ -2,8 +2,11 @@ package com.example.duantotnghiep.repository;
 
 import com.example.duantotnghiep.entity.KhachHang;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.UUID;
 
+@Repository
 public interface KhachHangRepository extends JpaRepository<KhachHang, UUID> {
 
 //    @Query("SELECT new com.example.duantotnghiep.response.KhachHangResponse(tk.id, tk.maTaiKhoan, tk.name, tk.email, tk.soDienThoai, dc.diaChi) " +

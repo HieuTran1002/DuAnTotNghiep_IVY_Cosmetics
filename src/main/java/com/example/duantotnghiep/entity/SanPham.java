@@ -1,7 +1,6 @@
 package com.example.duantotnghiep.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -85,17 +84,5 @@ public class SanPham {
 
     @Column(name = "dohot")
     private int doHot;
-
-//    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    private List<SanPhamChiTiet> listSanPhamChiTiet;
-//
-//    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    private List<SpGiamGia> spGiamGiaList;
-//
-//    @OneToMany(mappedBy = "sanPham", fetch = FetchType.LAZY)
-//    @JsonManagedReference
-//    private List<Image> listImage;
 
 }

@@ -36,10 +36,4 @@ public class XuatXu {
     @JsonManagedReference
     private List<SanPham> sanPhamList;
 
-    public XuatXu(UUID id, String ma, String ten, Integer trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.trangThai = trangThai;
-    }
 }

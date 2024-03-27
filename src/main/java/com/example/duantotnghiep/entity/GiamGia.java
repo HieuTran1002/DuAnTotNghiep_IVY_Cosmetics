@@ -55,16 +55,4 @@ public class GiamGia {
     @JsonManagedReference
     List<SanPham> sanPhamList;
 
-    public GiamGia(UUID id, String ma, String ten, Integer hinhThucGiam, Date ngayBatDau, Date ngayKetThuc, BigDecimal donGia, BigDecimal giaGiam, String moTa, Integer trangThai) {
-        this.id = id;
-        this.ma = ma;
-        this.ten = ten;
-        this.hinhThucGiam = hinhThucGiam;
-        this.ngayBatDau = ngayBatDau;
-        this.ngayKetThuc = ngayKetThuc;
-        this.donGia = donGia;
-        this.giaGiam = giaGiam;
-        this.moTa = moTa;
-        this.trangThai = trangThai;
-    }
 }

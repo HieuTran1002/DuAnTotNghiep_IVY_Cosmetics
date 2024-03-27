@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách quy đổi điểm</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h2>Danh sách quy đổi điểm</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>Điểm quy đổi</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Dữ liệu sẽ được thêm vào đây bằng cách sử dụng Thymeleaf hoặc JavaScript -->
+        <tr th:each="quyDoiDiem : ${quyDoiDiemList}">
+            <td th:text="${quyDoiDiem.id}"></td>
+            <td th:text="${quyDoiDiem.ten}"></td>
+            <td th:text="${quyDoiDiem.diemQuyDoi}"></td>
+            <td>
+                <a th:href="@{'/quydoidiem/' + ${quyDoiDiem.id}}" class="btn-detail">Detail</a>
+                <a th:href="@{'/quydoidiem/' + ${quyDoiDiem.id}}/edit" class="btn-edit">Edit</a>
+                <form th:action="@{'/quydoidiem/' + ${quyDoiDiem.id}}" method="post" class="form-delete">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/quydoidiem/new" class="btn-new">New Quy Đổi Điểm</a>
+</div>
+</body>
+</html>
