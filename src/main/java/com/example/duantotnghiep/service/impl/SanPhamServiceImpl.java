@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -36,5 +37,46 @@ public class SanPhamServiceImpl implements SanPhamService {
             }
         }
         return null;
+    }
+    @Override
+    public List<SanPham> getAll() {
+        return sanPhamRepository.findAll();
+    }
+
+    @Override
+    public SanPham add(SanPham SanPham) {
+        return sanPhamRepository.save(SanPham);
+    }
+
+    @Override
+    public SanPham update(UUID id, SanPham SanPham) {
+        SanPham SanPham1=sanPhamRepository.findById(id).orElse(null);
+        SanPham1.setId(SanPham.getId());
+        SanPham1.setCongDung(SanPham.getCongDung());
+        SanPham1.setGiamGia(SanPham.getGiamGia());
+        SanPham1.setDoHot(SanPham.getDoHot());
+        SanPham1.setGiaBan(SanPham.getGiaBan());
+        SanPham1.setHinhDang(SanPham.getHinhDang());
+        SanPham1.setTrangThai(SanPham.getTrangThai());
+        SanPham1.setThanhPhan(SanPham.getThanhPhan());
+        SanPham1.setXuatXu(SanPham.getXuatXu());
+        SanPham1.setThuongHieu(SanPham.getThuongHieu());
+        SanPham1.setMa(SanPham.getMa());
+        SanPham1.setTen(SanPham.getTen());
+        SanPham1.setGiaNhap(SanPham.getGiaNhap());
+        SanPham1.setNgayNhap(SanPham.getNgayNhap());
+        SanPham1.setMoTa(SanPham.getMoTa());
+        return sanPhamRepository.save(SanPham1);
+    }
+
+    @Override
+    public SanPham detail(UUID id) {
+        return sanPhamRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Boolean delete(UUID id) {
+        this.sanPhamRepository.deleteById(id);
+        return true;
     }
 }

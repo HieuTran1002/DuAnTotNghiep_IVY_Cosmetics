@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http:://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* CSS cho bảng */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<body>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>maAnhSanPham</th>
+        <th>tenAnhSanPham</th>
+        <th>TrangThai</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="list :${list}">
+        <td th:text="${list.id}"></td>
+        <td th:text="${list.maAnhSanPham}"></td>
+        <td>
+            <img th:src="@{'/upload/' + ${list.tenAnhSanPham}}" alt="Ảnh Sản Phẩm" style="max-width: 50px">
+        </td>
+        <td th:text="${list.trangThai==1?'Con':'Het'}"></td>
+        <td><a th:href="@{/upload-file/detail/{id}(id=${list.id})}" class="btn btn btn-secondary"><span class="bi bi-app-indicator"></span></a></td>
+        <td><a th:href="@{/upload-file/delete/{id}(id=${list.id})}" class="btn btn-danger"><span class="bi bi-trash-fill"></span></a></td>
+    </tr>
+    </tbody>
+</table>
+<form action="" method="post" th:object="${anhSanPhamEntity}" enctype="multipart/form-data">
+    <div class="row g-3">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Id"  name="id" th:value="${anhSanPhamEntity.id}" disabled>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="maAnhSanPham" name="maAnhSanPham" th:value="${anhSanPhamEntity.maAnhSanPham}">
+        </div>
+    </div>
+    <br>
+    <div class="row g-3">
+        <div class="col">
+            <!-- Thêm trường input cho file ảnh -->
+            <input type="file" class="form-control" placeholder="File ảnh" name="file" accept=".jpg, .jpeg, .png, .gif">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="trangThai" name="trangThai" th:value="${anhSanPhamEntity.trangThai}">
+        </div>
+    </div>
+    <br>
+
+<!--    hiển thị ảnh-->
+
+
+    <br>
+    <div class="row">
+        <div class="col">
+            <button th:formaction="@{/upload-file/add}" type="submit" class="btn btn-primary">Add</button>
+            <button th:formaction="@{/upload-file/update/{id}(id=${anhSanPhamEntity.id})}" type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

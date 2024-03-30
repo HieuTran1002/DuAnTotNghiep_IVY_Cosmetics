@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http:://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body class="container">
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>TenSanPham</th>
+        <th>TenMauSac</th>
+        <th>TenAnhSanPham</th>
+        <th>SoLuongTon</th>
+        <th>TrangThai</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${list}">
+        <td th:text="${item.id}"></td>
+        <td th:text="${item.sanPhamEntity != null ? item.sanPhamEntity.ten : 'Unknown'}"></td>
+        <td th:text="${item.mauSacEntity != null ? item.mauSacEntity.tenMauSac : 'Unknown'}"></td>
+        <td>
+            <img th:src="@{'/upload/' + ${item.anhSanPhamEntity !=null ? item.anhSanPhamEntity.tenAnhSanPham :'Unknown'}}" alt="Ảnh Sản Phẩm" style="max-width: 50px">
+        </td>
+        <td th:text="${item.soLuongTon}"></td>
+        <td th:text="${item.trangThai == 1 ? 'Con' : 'Het'}"></td>
+        <td>
+            <a th:href="@{/san-pham-chi-tiet/detail/{id}(id=${item.id})}" class="btn btn-secondary"><span class="bi bi-app-indicator"></span></a>
+            <a th:href="@{/san-pham-chi-tiet/delete/{id}(id=${item.id})}" class="btn btn-danger"><span class="bi bi-trash-fill"></span></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form action="" method="post" th:object="${sanPhamChiTietEntity}">
+    <div class="row g-3">
+        <div class="col">
+            <label class="form-label">Ten San Pham</label>
+            <select class="form-select" aria-label="Default select example" name="sanPhamEntity">
+                <option th:each="sanPham : ${sanPhamEntities}" th:text="${sanPham != null ? sanPham.ten :'Unknown'}" th:value="${sanPham.id}"></option>
+            </select>
+        </div>
+        <div class="col">
+            <label class="form-label">Ten Mau Sac</label>
+            <select class="form-select" aria-label="Default select example" name="mauSacEntity">
+                <option th:each="mauSac : ${mauSacEntities}" th:text="${mauSac != null ? mauSac.tenMauSac : 'Unknown'}" th:value="${mauSac.id}"></option>
+            </select>
+        </div>
+        <div class="col">
+            <label class="form-label">Ten Anh San Pham</label>
+            <select class="form-select" aria-label="Default select example" name="anhSanPhamEntity">
+                <option th:each="anhSanPham : ${anhSanPhamEntities}" th:text="${anhSanPham.tenAnhSanPham}" th:value="${anhSanPham.id}"></option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row g-3">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Id"  name="id" th:value="${sanPhamChiTietEntity.id}" disabled>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="SoLuongTon" name="soLuongTon" th:value="${sanPhamChiTietEntity.soLuongTon}">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="TrangThai" name="trangThai" th:value="${sanPhamChiTietEntity.trangThai}">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <button th:formaction="@{/san-pham-chi-tiet/add}" type="submit" class="btn btn-primary">Add</button>
+            <button th:formaction="@{/san-pham-chi-tiet/update/{id}(id=${sanPhamChiTietEntity.id})}" type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

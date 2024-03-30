@@ -19,7 +19,6 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Dữ liệu sẽ được thêm vào đây bằng cách sử dụng Thymeleaf hoặc JavaScript -->
         <tr th:each="quyDoiDiem : ${quyDoiDiemList}">
             <td th:text="${quyDoiDiem.id}"></td>
             <td th:text="${quyDoiDiem.ten}"></td>
