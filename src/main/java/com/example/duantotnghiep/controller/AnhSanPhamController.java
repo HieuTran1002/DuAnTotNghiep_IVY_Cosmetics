@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@RestController
 public class AnhSanPhamController {
 //    dùng để chứa đường dẫn tới thư mục lưu trữ
     private final Path fileStorageLocation= Paths.get("src/main/resources/static/upload");

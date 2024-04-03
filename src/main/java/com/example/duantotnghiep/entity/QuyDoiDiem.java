@@ -22,7 +22,7 @@ public class QuyDoiDiem {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "sotiemtuongung")
+    @Column(name = "sotientuongung")
     private String soTiemTuongUng;
 
     @Column(name = "sodiemtuongung")

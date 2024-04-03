@@ -13,13 +13,13 @@ import java.util.UUID;
 
 @Repository
 public interface ThuongHieuRepository extends JpaRepository<ThuongHieu, UUID> {
-
-    List<ThuongHieu> findByTrangThai(Integer trangThai);
-
-    @Query("SELECT NEW com.example.duantotnghiep.entity.ThuongHieu(th.id, th.tenThuongHieu, th.trangThai, th.ngayTao, th.ngayCapNhat)\n" +
-            "FROM ThuongHieu th\n" +
-            "WHERE (:trangThai IS NULL OR th.trangThai = :trangThai) " +
-            "AND (:tenThuongHieu IS NULL OR th.tenThuongHieu LIKE %:tenThuongHieu%) ORDER BY th.ngayTao DESC")
-    Page<ThuongHieu> getAllThuongHieu(@Param("trangThai") Integer trangThai, @Param("tenThuongHieu") String tenThuongHieu, Pageable pageable);
+//
+//    List<ThuongHieu> findByTrangThai(Integer trangThai);
+//
+//    @Query("SELECT NEW com.example.duantotnghiep.entity.ThuongHieu(th.id, th.tenThuongHieu, th.trangThai, th.ngayTao, th.ngayCapNhat)\n" +
+//            "FROM ThuongHieu th\n" +
+//            "WHERE (:trangThai IS NULL OR th.trangThai = :trangThai) " +
+//            "AND (:tenThuongHieu IS NULL OR th.tenThuongHieu LIKE %:tenThuongHieu%) ORDER BY th.ngayTao DESC")
+//    Page<ThuongHieu> getAllThuongHieu(@Param("trangThai") Integer trangThai, @Param("tenThuongHieu") String tenThuongHieu, Pageable pageable);
 }
 

@@ -20,28 +20,34 @@ public class DanhMucServiceImpl implements DanhMucService {
     }
 
     @Override
-    public DanhMuc add(DanhMuc DanhMuc) {
-        return danhMucRepository.save(DanhMuc);
+    public DanhMuc add(DanhMuc danhMuc) {
+        return danhMucRepository.save(danhMuc);
     }
 
     @Override
-    public DanhMuc update(UUID id, DanhMuc DanhMuc) {
-        DanhMuc DanhMuc1=danhMucRepository.findById(id).orElse(null);
-        DanhMuc1.setId(DanhMuc.getId());
-        DanhMuc1.setMa(DanhMuc.getMa());
-        DanhMuc1.setTen(DanhMuc.getTen());
-        DanhMuc1.setSanPhamList(DanhMuc.getSanPhamList());
-        DanhMuc1.setTrangThai(DanhMuc.getTrangThai());
-        return danhMucRepository.save(DanhMuc1);
+    public DanhMuc update(UUID id, DanhMuc danhMuc) {
+        DanhMuc existingDanhMuc = danhMucRepository.findById(id).orElse(null);
+        if (existingDanhMuc != null) {
+            existingDanhMuc.setMa(danhMuc.getMa());
+            existingDanhMuc.setTen(danhMuc.getTen());
+            existingDanhMuc.setSanPhamList(danhMuc.getSanPhamList());
+            existingDanhMuc.setTrangThai(danhMuc.getTrangThai());
+            return danhMucRepository.save(existingDanhMuc);
+        }
+        return null;
     }
 
     @Override
     public DanhMuc detail(UUID id) {
-        return null;
+        return danhMucRepository.findById(id).orElse(null);
     }
 
     @Override
     public Boolean delete(UUID id) {
-        return null;
+        if (danhMucRepository.existsById(id)) {
+            danhMucRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

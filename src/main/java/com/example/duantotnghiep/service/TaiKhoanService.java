@@ -17,4 +17,8 @@ public interface TaiKhoanService {
     TaiKhoan updateTaiKhoan(UUID id, TaiKhoan taiKhoan);
 
     void deleteTaiKhoan(UUID id);
+
+    String getRoles(TaiKhoan taiKhoan);
+
+    boolean authenticationSuccess(int role);
 }

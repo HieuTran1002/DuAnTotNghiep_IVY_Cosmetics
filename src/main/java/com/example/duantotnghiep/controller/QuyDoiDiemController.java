@@ -6,30 +6,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Controller
+@RestController
 public class QuyDoiDiemController {
 
     @Autowired
     private QuyDoiDiemService quyDoiDiemService;
 
+
     @GetMapping("/quydoidiem")
-    public String getAllQuyDoiDiem(Model model) {
+    public ModelAndView getAllQuyDoiDiem(Model model) {
         List<QuyDoiDiem> quyDoiDiemList = quyDoiDiemService.getAllQuyDoiDiems();
         model.addAttribute("quyDoiDiemList", quyDoiDiemList);
-        return "quydoidiem";
+        return new ModelAndView("testpages/quydoidiem");
     }
 
     @GetMapping("/quydoidiem/{id}")
-    public String getQuyDoiDiemById(@PathVariable UUID id, Model model) {
+    public ModelAndView getQuyDoiDiemByIdWithModelAndView(@PathVariable UUID id, Model model) {
         Optional<QuyDoiDiem> quyDoiDiem = quyDoiDiemService.getQuyDoiDiemById(id);
         quyDoiDiem.ifPresent(value -> model.addAttribute("quyDoiDiem", value));
-        return "quydoidiem-detail";
+        return new ModelAndView("quydoidiem-detail");
     }
+
+//    @GetMapping("/quydoidiem/{id}")
+//    public String getQuyDoiDiemByIdWithString(@PathVariable UUID id, Model model) {
+//        Optional<QuyDoiDiem> quyDoiDiem = quyDoiDiemService.getQuyDoiDiemById(id);
+//        quyDoiDiem.ifPresent(value -> model.addAttribute("quyDoiDiem", value));
+//        return "quydoidiem-detail";
+//    }
+
+
+
 
     @PostMapping("/quydoidiem")
     public String createQuyDoiDiem(@ModelAttribute QuyDoiDiem quyDoiDiem) {

@@ -21,11 +21,12 @@
         <tbody>
         <tr th:each="quyDoiDiem : ${quyDoiDiemList}">
             <td th:text="${quyDoiDiem.id}"></td>
-            <td th:text="${quyDoiDiem.ten}"></td>
-            <td th:text="${quyDoiDiem.diemQuyDoi}"></td>
+            <td th:text="${quyDoiDiem.soTiemTuongUng}"></td>
+            <td th:text="${quyDoiDiem.soDiemTuongUng}"></td>
+            <td th:text="${quyDoiDiem.trangThai}"></td>
             <td>
                 <a th:href="@{'/quydoidiem/' + ${quyDoiDiem.id}}" class="btn-detail">Detail</a>
-                <a th:href="@{'/quydoidiem/' + ${quyDoiDiem.id}}/edit" class="btn-edit">Edit</a>
+                <a th:href="@{'/quydoidiem/' + ${quyDoiDiem.id} + '/edit'}">Edit</a>
                 <form th:action="@{'/quydoidiem/' + ${quyDoiDiem.id}}" method="post" class="form-delete">
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="submit" class="btn-delete">Delete</button>

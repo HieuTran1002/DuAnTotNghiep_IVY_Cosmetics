@@ -50,9 +50,9 @@ public class KhachHang {
     @Column(name = "trangthai")
     private Integer trangThai;
 
-    @OneToMany(mappedBy = "khachhang", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Voucher> voucherLists;
+//    @OneToMany(mappedBy = "khachhang", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    private List<Voucher> voucherLists;
 
 
 }

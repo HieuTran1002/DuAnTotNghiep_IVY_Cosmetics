@@ -14,12 +14,12 @@ import java.util.UUID;
 @Repository
 public interface DanhMucRepository extends JpaRepository<DanhMuc, UUID> {
 
-    List<DanhMuc> findByTrangThai(Integer trangThai);
-
-    @Query("SELECT NEW com.example.duantotnghiep.entity.DanhMuc(th.id, th.tenDanhMuc, th.trangThai, th.ngayTao, th.ngayCapNhat)\n" +
-            "FROM DanhMuc th\n" +
-            "WHERE (:trangThai IS NULL OR th.trangThai = :trangThai) " +
-            "AND (:tenDanhMuc IS NULL OR th.tenDanhMuc LIKE %:tenDanhMuc%) ORDER BY th.ngayTao DESC")
-    Page<DanhMuc> getAllDanhMuc(@Param("trangThai") Integer trangThai, @Param("tenDanhMuc") String tenDanhMuc, Pageable pageable);
+//    List<DanhMuc> findByTrangThai(Integer trangThai);
+//
+//    @Query("SELECT NEW com.example.duantotnghiep.entity.DanhMuc(th.id, th.ten, th.trangThai, th.ngayTao, th.ngayCapNhat)\n" +
+//            "FROM DanhMuc th\n" +
+//            "WHERE (:trangThai IS NULL OR th.trangThai = :trangThai) " +
+//            "AND (:tenDanhMuc IS NULL OR th.ten LIKE %:tenDanhMuc%) ORDER BY th.nga DESC")
+//    Page<DanhMuc> getAllDanhMuc(@Param("trangThai") Integer trangThai, @Param("tenDanhMuc") String tenDanhMuc, Pageable pageable);
 
 }

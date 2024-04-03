@@ -53,8 +53,8 @@ public class NhanVien {
     @Column(name = "trangthai")
     private Integer trangThai;
 
-    @OneToMany(mappedBy = "nhanVien", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<NhanVien> idGuiBC;
+//    @OneToMany(mappedBy = "nhanVien", fetch = FetchType.LAZY)
+//    @JsonManagedReference
+//    private List<NhanVien> idGuiBC;
 
 }
