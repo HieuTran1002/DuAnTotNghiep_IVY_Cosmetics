@@ -27,6 +27,7 @@ public class SanPhamChiTietServiceImpl implements SanPhamChiTietService {
     public SanPhamChiTietEntity update(UUID id, SanPhamChiTietEntity sanPhamChiTietEntity) {
         SanPhamChiTietEntity sanPhamChiTietEntity1=sanPhamChiTietRepository.findById(id).orElse(null);
         sanPhamChiTietEntity1.setId(sanPhamChiTietEntity.getId());
+        sanPhamChiTietEntity1.setSanPhamEntity(sanPhamChiTietEntity.getSanPhamEntity());
         sanPhamChiTietEntity1.setAnhSanPhamEntity(sanPhamChiTietEntity.getAnhSanPhamEntity());
         sanPhamChiTietEntity1.setMauSacEntity(sanPhamChiTietEntity.getMauSacEntity());
         sanPhamChiTietEntity1.setTrangThai(sanPhamChiTietEntity.getTrangThai());
@@ -46,4 +47,5 @@ public class SanPhamChiTietServiceImpl implements SanPhamChiTietService {
         this.sanPhamChiTietRepository.deleteById(id);
         return true;
     }
+
 }

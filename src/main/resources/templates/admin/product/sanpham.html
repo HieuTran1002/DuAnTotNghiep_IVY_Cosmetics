@@ -10,7 +10,6 @@
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th>Id</th>
         <th>Thanh Phan</th>
         <th>Cong Dung</th>
         <th>Ten Thuong Hieu</th>
@@ -30,7 +29,6 @@
     </thead>
     <tbody>
     <tr th:each="item : ${list}">
-        <td th:text="${item.id}"></td>
         <td th:text="${item.thanhPhanEntity != null ? item.thanhPhanEntity.tenThanhPhan :'Unknown'}"></td>
         <td th:text="${item.congDungEntity != null ? item.congDungEntity.tenConDung :'Unknown'}"></td>
         <td th:text="${item.thuongHieuEntity != null ? item.thuongHieuEntity.ten :'Unknown'}"></td>
@@ -90,9 +88,6 @@
     </div>
     <br>
     <div class="row g-3">
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Id"  name="id" th:value="${sanPhamEntity.id}" disabled>
-        </div>
         <div class="col">
             <input type="text" class="form-control" placeholder="Ma" name="ma" th:value="${sanPhamEntity.ma}">
         </div>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http:://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<style>
+    .container {
+        margin-right: 60px;
+    }
+
+    .col-3 {
+        background-color: white;
+
+        margin-top: 50px;
+        margin-left: 50px;
+    }
+
+    .content .price {
+        display: flex;
+    }
+
+    .content .qty {
+        display: flex;
+    }
+
+    .product-hot {
+        display: flex;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="col-md-6">
+        <a th:href="@{'/cart/' + ${gioHangId}}" class="btn btn-secondary">Cart View</a>
+    </div>
+    <div class="row">
+
+        <div class="col-3" th:each="item :${list}">
+            <div class="image">
+                <a th:href="@{/san-pham-chi-tiet/detail/{id}(id=${item.id})}" class="btn btn-secondary">
+                    <img th:src="@{'/upload/' + ${item.anhSanPhamEntity !=null ? item.anhSanPhamEntity.tenAnhSanPham :'Unknown'}}"
+                         alt="Ảnh Sản Phẩm" style="max-width: 100px">
+                </a>
+            </div>
+            <div class="content">
+                <div class="price">
+                    <p>Ten :
+                    <div th:if="${item.sanPhamEntity != null}" th:text="${item.sanPhamEntity.ten}"></div>
+                    </p>
+                </div>
+                <div class="price">
+                    <p>Gia :
+                    <div th:if="${item.sanPhamEntity != null}" th:text="${item.sanPhamEntity.giaBan}"></div>
+                    </p>
+                </div>
+                <div class="qty">
+                    <p>So Luong :
+                    <div th:text="${item.soLuongTon}"></div>
+                    </p>
+                </div>
+            </div>
+            <p>
+            <form method="post" th:action="@{/cart/add/12BAF33E-AC51-4558-9364-7B8E335121E0/} + ${item.id}">
+                <button type="submit" class="buy-now btn btn-sm btn-primary">Add To Cart</button>
+            </form>
+            </p>
+        </div>
+    </div>
+    <br>
+    <br>
+    <hr>
+    <div class="product-hot" th:each="item :${list}">
+        <img th:src="@{'/upload/' + ${item.anhSanPhamEntity !=null ? item.anhSanPhamEntity.tenAnhSanPham :'Unknown'}}"
+             alt="Ảnh Sản Phẩm" style="max-width: 50px">
+    </div>
+</body>
+
+</html>

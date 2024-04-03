@@ -36,7 +36,7 @@ public class GioHangChiTietController {
         List<SanPhamChiTietEntity> sanPhamChiTietEntity=sanPhamChiTietService.getAll();
         model.addAttribute("sanPhamChiTietEntity",sanPhamChiTietEntity);
         model.addAttribute("gioHangChiTietEntity",new GioHangChiTietEntity());
-        return new ModelAndView("user/gio_hang_chi_tiet");
+        return new ModelAndView("user/cart");
     }
     @PostMapping("/gio-hang-chi-tiet/add")
     public String add(@ModelAttribute GioHangChiTietEntity gioHangChiTietEntity){

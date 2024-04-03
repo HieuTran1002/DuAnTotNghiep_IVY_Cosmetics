@@ -5,14 +5,12 @@ import com.example.duantotnghiep.demo.repository.SanPhamRepository;
 import com.example.duantotnghiep.demo.service.AnhSanPhamService;
 import com.example.duantotnghiep.demo.service.MauSacService;
 import com.example.duantotnghiep.demo.service.SanPhamChiTietService;
+import com.example.duantotnghiep.demo.service.SanPhamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -23,7 +21,7 @@ public class SanPhamChiTietController {
     @Autowired
     private SanPhamChiTietService sanPhamChiTietService;
     @Autowired
-    private SanPhamRepository sanPhamRepository;
+    private SanPhamService sanPhamService;
     @Autowired
     private MauSacService mauSacService;
     @Autowired
@@ -32,12 +30,12 @@ public class SanPhamChiTietController {
     public ModelAndView getAll(Model model){
         List<SanPhamChiTietEntity> list=sanPhamChiTietService.getAll();
         model.addAttribute("list",list);
-        List<SanPhamEntity> sanPhamEntities=sanPhamRepository.findAll();
-        model.addAttribute("sanPhamEntities",sanPhamEntities);
-        List<MauSacEntity> mauSacEntities=mauSacService.getAll();
-        model.addAttribute("mauSacEntities",mauSacEntities);
-        List<AnhSanPhamEntity> anhSanPhamEntities=anhSanPhamService.getAll();
-        model.addAttribute("anhSanPhamEntities",anhSanPhamEntities);
+        List<SanPhamEntity> sanPhamEntity=sanPhamService.getAll();
+        model.addAttribute("sanPhamEntity",sanPhamEntity);
+        List<MauSacEntity> mauSacEntity=mauSacService.getAll();
+        model.addAttribute("mauSacEntity",mauSacEntity);
+        List<AnhSanPhamEntity> anhSanPhamEntity=anhSanPhamService.getAll();
+        model.addAttribute("anhSanPhamEntity",anhSanPhamEntity);
         model.addAttribute("sanPhamChiTietEntity",new SanPhamChiTietEntity());
         return new ModelAndView("user/san_pham_chi_tiet");
     }
@@ -50,12 +48,12 @@ public class SanPhamChiTietController {
     public String detail(@PathVariable UUID id, Model model){
         SanPhamChiTietEntity sanPhamChiTietEntity=sanPhamChiTietService.detail(id);
         model.addAttribute("sanPhamChiTietEntity",sanPhamChiTietEntity);
-        List<SanPhamEntity> sanPhamEntities=sanPhamRepository.findAll();
-        model.addAttribute("sanPhamEntities",sanPhamEntities);
-        List<MauSacEntity> mauSacEntities=mauSacService.getAll();
-        model.addAttribute("mauSacEntities",mauSacEntities);
-        List<AnhSanPhamEntity> anhSanPhamEntities=anhSanPhamService.getAll();
-        model.addAttribute("anhSanPhamEntities",anhSanPhamEntities);
+        List<SanPhamEntity> sanPhamEntity=sanPhamService.getAll();
+        model.addAttribute("sanPhamEntity",sanPhamEntity);
+        List<MauSacEntity> mauSacEntity=mauSacService.getAll();
+        model.addAttribute("mauSacEntity",mauSacEntity);
+        List<AnhSanPhamEntity> anhSanPhamEntity=anhSanPhamService.getAll();
+        model.addAttribute("anhSanPhamEntity",anhSanPhamEntity);
         return "user/san_pham_chi_tiet";
     }
     @GetMapping("/san-pham-chi-tiet/delete/{id}")

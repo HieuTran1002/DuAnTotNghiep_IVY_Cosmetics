@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +15,9 @@ public class GioHangEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
+    @ManyToOne
+    @JoinColumn(name = "idkhachhang",referencedColumnName = "id")
+    private KhachHangEntity khachHangEntity;
     @Column(name = "ma")
     private String ma;
     @Column(name = "ngaytao")
@@ -24,4 +28,6 @@ public class GioHangEntity {
     private String ghiChu;
     @Column(name = "trangthai")
     private Integer trangThai;
+    @OneToMany(mappedBy = "gioHang", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<GioHangChiTietEntity> gioHangChiTietEntities;
 }

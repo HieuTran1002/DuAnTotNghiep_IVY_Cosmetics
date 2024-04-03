@@ -34,4 +34,7 @@ public class GioHangChiTietEntity {
     public String getSanPhamAnh(){
         return this.sanPhamChiTietEntity.getAnhSanPhamEntity().getTenAnhSanPham();
     }
+    public BigDecimal getDonGia() {
+        return donGia != null ? donGia : BigDecimal.ZERO; // Return zero if donGia is null
+    }
 }
