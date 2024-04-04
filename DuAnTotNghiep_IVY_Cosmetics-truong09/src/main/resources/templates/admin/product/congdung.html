@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http:://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<body class="container">
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>MaCongDung</th>
+        <th>TenCongDung</th>
+        <th>MoTa</th>
+        <th>TrangThai</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="list :${list}">
+        <td th:text="${list.id}"></td>
+        <td th:text="${list.maCongDung}"></td>
+        <td th:text="${list.tenConDung}"></td>
+        <td th:text="${list.moTa}"></td>
+        <td th:text="${list.trangThai==1?'Con':'Het'}"></td>
+        <td><a th:href="@{/cong-dung/detail/{id}(id=${list.id})}" class="btn btn btn-secondary"><span class="bi bi-app-indicator"></span></a></td>
+        <td><a th:href="@{/cong-dung/delete/{id}(id=${list.id})}" class="btn btn-danger"><span class="bi bi-trash-fill"></span></a></td>
+    </tr>
+    </tbody>
+</table>
+<form action="" method="post" th:object="${congDungEntity}">
+    <div class="row g-3">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="Id"  name="id" th:value="${congDungEntity.id}" disabled>
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="MaCongDung" name="maCongDung" th:value="${congDungEntity.maCongDung}">
+        </div>
+    </div>
+    <br>
+    <div class="row g-3">
+        <div class="col">
+            <input type="text" class="form-control" placeholder="TenCongDung" name="tenConDung" th:value="${congDungEntity.tenConDung}">
+        </div>
+        <div class="col">
+            <input type="text" class="form-control" placeholder="TrangThai" name="trangThai" th:value="${congDungEntity.trangThai}">
+        </div>
+    </div>
+
+    <br>
+    <div class="col">
+        <input type="text" class="form-control" placeholder="MoTa" name="moTa" th:value="${congDungEntity.moTa}">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <button th:formaction="@{/cong-dung/add}" type="submit" class="btn btn-primary">Add</button>
+            <button th:formaction="@{/cong-dung/update/{id}(id=${congDungEntity.id})}" type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
