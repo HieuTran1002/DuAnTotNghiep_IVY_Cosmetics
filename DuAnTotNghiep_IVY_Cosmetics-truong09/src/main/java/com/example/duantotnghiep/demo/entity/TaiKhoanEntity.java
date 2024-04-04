@@ -43,5 +43,7 @@ public class TaiKhoanEntity implements Serializable{
     private Date ngayCapNhat;
     @Column(name = "trangthai")
     private Integer trangThai;
+    @Column(name = "roles")
+    private Integer roles;
 
 }
