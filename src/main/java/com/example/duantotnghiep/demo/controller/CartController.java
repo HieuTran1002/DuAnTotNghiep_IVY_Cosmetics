@@ -44,6 +44,10 @@ public class CartController {
         List<GioHangChiTietEntity> cartItems = shoppingCartService.getCartByGioHangId(session);
         model.addAttribute("cartItems", cartItems);
         BigDecimal totalPrice = shoppingCartService.sumTotalPrice(cartItems);
+        BigDecimal viDiem=BigDecimal.valueOf(0);
+        BigDecimal sumOfCart=totalPrice.subtract(viDiem);
+        model.addAttribute("sumOfCart",sumOfCart);
+        model.addAttribute("viDiem",viDiem);
         model.addAttribute("totalPrice", totalPrice);
         return "user/cart";
     }
@@ -56,6 +60,7 @@ public class CartController {
         }
         return "redirect:/cart/" + gioHangId;
     }
+
 
     @PostMapping("/cart/remove/{id}")
     public String removeCart(@RequestParam("id") String cartItemId, Model model, HttpSession session) {

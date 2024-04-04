@@ -59,11 +59,10 @@
                                     <label class="text-black h4">Khách Hàng</label>
                                 </div>
                                 <div class="col-md-8 mb-3 mb-md-0">
-                                    <input type="text" class="form-control py-3"  name="ten" th:value="${khachHangEntity.ten}"
-                                           placeholder="Họ và Tên">
+                                    <input type="text" class="form-control py-3" id="ten" placeholder="Họ và Tên">
                                 </div>
                                 <div class="col">
-                                    <select class="form-select" aria-label="Default select example"name="khachHangEntity" id="khachHangId">
+                                    <select class="form-select" aria-label="Default select example" name="khachHangEntity" id="khachHangId">
                                         <option value="">Chọn khách hàng</option>
                                         <option th:each="khachHang : ${list}" th:value="${khachHang.id}">
                                             <span th:text="${khachHang.soDienThoai}"></span>
@@ -71,12 +70,10 @@
                                     </select>
                                     <button type="button" class="btn btn-primary mt-3" onclick="selectKhachHang()">Chọn</button>
                                 </div>
-                                </br>
-                                </br>
-                                </br>
                                 <div class="col-md-8 mb-3 mb-md-0">
                                     <input type="text" class="form-control py-3" name="soDienThoai" id="soDienThoai" placeholder="Số điện thoại">
                                 </div>
+                                </br>
                                 </br>
                                 </br>
                                 </br>
@@ -84,6 +81,36 @@
                                     <input type="email" class="form-control py-3" name="email" id="email" placeholder="Email">
                                 </div>
                             </div>
+<!--                            <div class="row">-->
+<!--                                <div class="col-md-12">-->
+<!--                                    <label class="text-black h4">Khách Hàng</label>-->
+<!--                                </div>-->
+<!--                                <div class="col-md-8 mb-3 mb-md-0">-->
+<!--                                    <input type="text" class="form-control py-3"  name="ten" th:value="${khachHangEntity.ten}"-->
+<!--                                           placeholder="Họ và Tên">-->
+<!--                                </div>-->
+<!--                                <div class="col">-->
+<!--                                    <select class="form-select" aria-label="Default select example"name="khachHangEntity" id="khachHangId">-->
+<!--                                        <option value="">Chọn khách hàng</option>-->
+<!--                                        <option th:each="khachHang : ${list}" th:value="${khachHang.id}">-->
+<!--                                            <span th:text="${khachHang.soDienThoai}"></span>-->
+<!--                                        </option>-->
+<!--                                    </select>-->
+<!--                                    <button type="button" class="btn btn-primary mt-3">Chọn</button>-->
+<!--                                </div>-->
+<!--                                </br>-->
+<!--                                </br>-->
+<!--                                </br>-->
+<!--                                <div class="col-md-8 mb-3 mb-md-0">-->
+<!--                                    <input type="text" class="form-control py-3" name="soDienThoai" id="soDienThoai" placeholder="Số điện thoại">-->
+<!--                                </div>-->
+<!--                                </br>-->
+<!--                                </br>-->
+<!--                                </br>-->
+<!--                                <div class="col-md-8 mb-3 mb-md-0">-->
+<!--                                    <input type="email" class="form-control py-3" name="email" id="email" placeholder="Email">-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                         <div class="col-md-6 pl-5">
                             <div class="row justify-content-end">
@@ -106,33 +133,34 @@
                                             <span class="text-black">Total</span>
                                         </div>
                                         <div class="col-md-6 text-right">
-                                            <strong class="text-black" th:text="${totalPrice}"></strong>
+                                            <strong id="totalPrice" class="text-black" th:text="${totalPrice}"></strong>
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <span class="text-black">Điểm Giảm</span>
-                                        </div>
-                                        <div class="col-md-6 text-right">
-                                            <strong class="text-black" th:text="${discount}">0</strong>
-                                        </div>
-                                    </div>
+<!--                                    <div class="row mb-3">-->
+<!--                                        <div class="col-md-6">-->
+<!--                                            <span class="text-black">Điểm Giảm</span>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-6 text-right">-->
+<!--                                            <strong class="text-black" th:text="${discount}">0</strong>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <span class="text-black">Tiền Khách Đưa</span>
                                         </div>
                                         <div class="col-md-6 text-right">
-                                            <input type="number" id="customerPayment" class="form-control">
+                                            <input type="number" id="customerPayment" class="form-control" onkeyup="calculateSumOfCart()">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <span class="text-black">Tiền Khách Trả</span>
+                                            <span class="text-black">Tổng Số Tiền Phát Sinh</span>
                                         </div>
                                         <div class="col-md-6 text-right">
-                                            <strong class="text-red"></strong>
+                                            <strong id="sumOfCart" class="text-black"></strong>
                                         </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <a href="/check-out/view" class="btn btn-primary btn-lg py-3 btn-block">Thanh
@@ -149,5 +177,36 @@
         </div>
     </div>
 </div>
+<div id="khachHangList" th:attr="data-khachHangList=${list}"></div>
+<script>
+    var khachHangList = JSON.parse(document.getElementById('khachHangList').getAttribute('data-khachHangList'));
+</script>
+<script>
+    function calculateSumOfCart() {
+        var customerPayment = document.getElementById("customerPayment").value;
+        var totalPrice = parseFloat(document.getElementById("totalPrice").innerText);
+        var sumOfCart = totalPrice - parseFloat(customerPayment);
+        document.getElementById("sumOfCart").innerText = sumOfCart;
+    }
+    function selectKhachHang() {
+        var khachHangId = document.getElementById("khachHangId").value;
+        var khachHang = findKhachHangById(khachHangId);
+
+        if (khachHang != null) {
+            document.getElementById("ten").value = khachHang.ten;
+            document.getElementById("soDienThoai").value = khachHang.soDienThoai;
+            document.getElementById("email").value = khachHang.email;
+        }
+    }
+    function findKhachHangById(id) {
+        for (var i = 0; i < khachHangList.length; i++) {
+            if (khachHangList[i].id === id) {
+                return khachHangList[i];
+            }
+        }
+        return null;
+    }
+</script>
+
 </body>
 </html>
