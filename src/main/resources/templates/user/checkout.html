@@ -3,14 +3,151 @@
 <html xmlns:th="http:://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Shopping Cart</title>
+    <title>Check Out</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-<form method="" action="">
-    
-</form>
+<div class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div class="site-blocks-table">
+                    <h1>Bán Hàng Tại Quầy</h1>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="product-thumbnail">Ảnh SP</th>
+                            <th class="product-name">Tên SP</th>
+                            <th class="product-price">Giá Tiền</th>
+                            <th class="product-quantity">Số Lượng</th>
+                            <th class="product-total">Tổng</th>
+                            <th class="product-remove">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item : ${cartItems}">
+                            <td class="product-thumbnail">
+                                <img th:src="@{'/upload/' + ${item.sanPhamChiTietEntity.anhSanPhamEntity.tenAnhSanPham}}"
+                                     alt="Ảnh Sản Phẩm" style="max-width: 100px">
+                            </td>
+                            <td class="product-name">
+                                <h2 class="h5 text-black" th:text="${item.sanPhamChiTietEntity.sanPhamEntity.ten}"></h2>
+                            </td>
+                            <td th:text="${item.sanPhamChiTietEntity.sanPhamEntity.giaBan}"></td>
+                            <td th:text="${item.soLuong}"></td>
+                            <td th:text="${item.sanPhamChiTietEntity.sanPhamEntity.giaBan != null &amp;&amp; item.soLuong != null ? item.sanPhamChiTietEntity.sanPhamEntity.giaBan * item.soLuong : 'N/A'}"></td>
+                            <td>
+                                <form action="/cart/remove/{id}" method="post">
+                                    <input type="hidden" name="id" th:value="${item.id}">
+                                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <a href="/home/view" class="btn btn-secondary">Continue Shopping</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="text-black h4">Khách Hàng</label>
+                                </div>
+                                <div class="col-md-8 mb-3 mb-md-0">
+                                    <input type="text" class="form-control py-3"  name="ten" th:value="${khachHangEntity.ten}"
+                                           placeholder="Họ và Tên">
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" aria-label="Default select example"name="khachHangEntity" id="khachHangId">
+                                        <option value="">Chọn khách hàng</option>
+                                        <option th:each="khachHang : ${list}" th:value="${khachHang.id}">
+                                            <span th:text="${khachHang.soDienThoai}"></span>
+                                        </option>
+                                    </select>
+                                    <button type="button" class="btn btn-primary mt-3" onclick="selectKhachHang()">Chọn</button>
+                                </div>
+                                </br>
+                                </br>
+                                </br>
+                                <div class="col-md-8 mb-3 mb-md-0">
+                                    <input type="text" class="form-control py-3" name="soDienThoai" id="soDienThoai" placeholder="Số điện thoại">
+                                </div>
+                                </br>
+                                </br>
+                                </br>
+                                <div class="col-md-8 mb-3 mb-md-0">
+                                    <input type="email" class="form-control py-3" name="email" id="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pl-5">
+                            <div class="row justify-content-end">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-12 text-right border-bottom mb-5">
+                                            <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Subtotal</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <strong class="text-black" th:text="${totalPrice}"></strong>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Total</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <strong class="text-black" th:text="${totalPrice}"></strong>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Điểm Giảm</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <strong class="text-black" th:text="${discount}">0</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Tiền Khách Đưa</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <input type="number" id="customerPayment" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <span class="text-black">Tiền Khách Trả</span>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            <strong class="text-red"></strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a href="/check-out/view" class="btn btn-primary btn-lg py-3 btn-block">Thanh
+                                                Toán
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

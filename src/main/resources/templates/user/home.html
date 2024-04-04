@@ -38,7 +38,7 @@
 <body>
 <div class="container">
     <div class="col-md-6">
-        <a th:href="@{'/cart/' + ${gioHangId}}" class="btn btn-secondary">Cart View</a>
+        <a th:href="@{/cart}" class="btn btn-secondary">Cart View</a>
     </div>
     <div class="row">
 
@@ -80,6 +80,7 @@
         <img th:src="@{'/upload/' + ${item.anhSanPhamEntity !=null ? item.anhSanPhamEntity.tenAnhSanPham :'Unknown'}}"
              alt="Ảnh Sản Phẩm" style="max-width: 50px">
     </div>
+</div>
 </body>
 
 </html>

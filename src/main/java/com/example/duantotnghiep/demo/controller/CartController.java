@@ -25,24 +25,40 @@ import java.util.UUID;
 public class CartController {
     @Autowired
     private GioHangRepository gioHangRepository;
+
     @Autowired
     private ShoppingCartServiceImpl shoppingCartService;
+
+    @Autowired
+    private HttpSession session;
+
     @PostMapping("/cart/add/{customerId}/{chiTietId}")
-    public String addToCart(@PathVariable UUID customerId,@PathVariable UUID chiTietId){
-        UUID gioHangId=shoppingCartService.findCreatCardByCustomerId(customerId);
-        shoppingCartService.addToCart(gioHangId,chiTietId);
-        return"redirect:/cart/"+ gioHangId;
+    public String addToCart(@PathVariable UUID customerId, @PathVariable UUID chiTietId) {
+        UUID gioHangId = shoppingCartService.findCreatCardByCustomerId(customerId,session);
+        shoppingCartService.addToCart(gioHangId, chiTietId);
+        return "redirect:/cart/" + gioHangId;
     }
+
     @GetMapping("/cart/{gioHangId}")
-    public String getCartByGioHangId(@PathVariable UUID gioHangId,Model model){
-        List<GioHangChiTietEntity> cartItems=shoppingCartService.getCartByGioHangId(gioHangId);
-        model.addAttribute("cartItems",cartItems);
-        BigDecimal totalPrice=shoppingCartService.sumTotalPrice(cartItems);
-        model.addAttribute("totalPrice",totalPrice);
-        return"user/cart";
+    public String getCartByGioHangId(Model model) {
+        List<GioHangChiTietEntity> cartItems = shoppingCartService.getCartByGioHangId(session);
+        model.addAttribute("cartItems", cartItems);
+        BigDecimal totalPrice = shoppingCartService.sumTotalPrice(cartItems);
+        model.addAttribute("totalPrice", totalPrice);
+        return "user/cart";
     }
+
+    @GetMapping("/cart")
+    public String viewCart(HttpSession session) {
+        UUID gioHangId = (UUID) session.getAttribute("gioHangId");
+        if(gioHangId == null){
+            return "user/cart";
+        }
+        return "redirect:/cart/" + gioHangId;
+    }
+
     @PostMapping("/cart/remove/{id}")
-    public String removeCart(@RequestParam("id") String cartItemId,Model model,HttpSession session){
+    public String removeCart(@RequestParam("id") String cartItemId, Model model, HttpSession session) {
         UUID itemId;
         try {
             itemId = UUID.fromString(cartItemId);
@@ -51,8 +67,8 @@ public class CartController {
             return "redirect:/cart";
         }
         shoppingCartService.removeCart(itemId);
-        UUID gioHangId=(UUID) session.getAttribute("gioHangId");
-        return "redirect:/cart/" +gioHangId;
+        UUID gioHangId = (UUID) session.getAttribute("gioHangId");
+        return "redirect:/cart/" + gioHangId;
     }
 
 }

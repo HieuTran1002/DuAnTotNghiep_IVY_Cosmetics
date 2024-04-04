@@ -5,6 +5,7 @@ import com.example.duantotnghiep.demo.entity.GioHangEntity;
 import com.example.duantotnghiep.demo.entity.KhachHangEntity;
 import com.example.duantotnghiep.demo.entity.SanPhamChiTietEntity;
 import com.example.duantotnghiep.demo.repository.*;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class ShoppingCartServiceImpl {
         this.gioHangChiTietRepository=gioHangChiTietRepository;
         this.khachHangRepository=khachHangRepository;
     }
-    public UUID findCreatCardByCustomerId(UUID customerId){
+    public UUID findCreatCardByCustomerId(UUID customerId , HttpSession session){
         KhachHangEntity khachHangEntity=khachHangRepository.findById(customerId).orElse(null);
         if(khachHangEntity ==null){
             return  null;
@@ -38,7 +39,9 @@ public class ShoppingCartServiceImpl {
             gioHangEntity.setKhachHangEntity(khachHangEntity);
             gioHangEntity=gioHangRepository.save(gioHangEntity);
         }
-        return gioHangEntity.getId();
+        UUID gioHangId=gioHangEntity.getId();
+        session.setAttribute("gioHangId",gioHangId); // luu id gio hang vao session
+        return gioHangId;
     }
     public void addToCart(UUID gioHangId , UUID chiTietId){
         // them san pham vao gio hang dua tren id cua gio hang va chi tiet san pham
@@ -59,7 +62,8 @@ public class ShoppingCartServiceImpl {
             }
         }
     }
-    public List<GioHangChiTietEntity> getCartByGioHangId(UUID gioHangId){
+    public List<GioHangChiTietEntity> getCartByGioHangId(HttpSession session){
+        UUID gioHangId=(UUID) session.getAttribute("gioHangId");
         // lay thong tin gio hang dua tren Id cua gio hang
         GioHangEntity gioHangEntity=gioHangRepository.findById(gioHangId).orElse(null);
         if (gioHangEntity != null){
